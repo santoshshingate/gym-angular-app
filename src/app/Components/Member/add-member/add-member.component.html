@@ -1,0 +1,131 @@
+<hr>
+<h3 class="title">Create Member</h3>
+<hr>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div  [hidden]="submitted">
+      <form nz-form [formGroup]="validateForm" class="login-form" #savemember (ngSubmit)="saveMember(saveMember)">
+        <!-- <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_name">Name</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name">
+            <input nz-input formControlName="member_name" id="member_name" />
+          </nz-form-control>
+        </nz-form-item> -->
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_name">Name</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name">
+            <input type="text" nz-input formControlName="member_name" id="member_name" />
+
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_address">Address</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Address">
+            <input type="text" nz-input formControlName="member_address" id="member_address" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="member_contact" nzRequired>Contact</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['member_contact']"
+           >
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+              <ng-template #addOnBeforeTemplate>
+                <nz-select formControlName="member_contactPrefix" class="phone-select">
+                  <nz-option nzLabel="+91" nzValue="+91"></nz-option>
+                </nz-select>
+              </ng-template>
+              <input formControlName="member_contact" id="'member_contact'" nz-input />
+
+               <div *ngIf = "(MemberContact.invalid)&&(MemberContact.touched)"  >
+              
+                <span *ngIf="MemberContact.errors.required">User Contact is Required</span>  
+                  <span *ngIf = "MemberContact.errors.minlength">   
+                      MinLength Error   
+                  </span>   
+                  <span *ngIf = "MemberContact.errors.maxlength">   
+                    Maxlength Error   
+                </span>                  
+              </div> 
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>DOB</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-date-picker formControlName="member_dob"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Start Date</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-date-picker formControlName="member_start_date"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>End Date</nz-form-label>
+          <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-date-picker formControlName="member_end_date"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- training type -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_training">Training</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="member_training" nzPlaceHolder="Select a training"
+              (ngModelChange)="changeTraining($event)" [(ngModel)]="selectedTraining" >
+              <nz-option *ngFor="let training of types" [nzLabel]="training.training_type" [nzValue]="training">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- plan -->
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_plan">Plan</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-select nzShowSearch nzAllowClear formControlName="member_plan" nzPlaceHolder="Select a plan"
+              (ngModelChange)="changePlan($event)" [(ngModel)]="selectedPlan">
+              <nz-option nzLabel="Monthly" nzValue="monthly"></nz-option>
+              <nz-option nzLabel="Quarterly" nzValue="quarterly"></nz-option>
+              <nz-option nzLabel="Yearly" nzValue="yearly"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="member_amount">Amount</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Amount">
+            <input nz-input  formControlName="member_amount" [(ngModel)]="fees" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item nz-row class="register-area">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button class="btn btn-success" nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
+          </nz-form-control>
+        </nz-form-item>
+
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div [hidden]="!submitted">
+      <h4>Member Added SuccessFully!</h4>
+      <button (click)="addMemberForm()"  nz-button nzType="primary">Add More Member</button>&nbsp;&nbsp;
+      <a routerLink="/view-member"><button  nz-button nzType="primary">Close</button></a>
+    </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

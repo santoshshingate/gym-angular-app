@@ -1,0 +1,275 @@
+<hr>
+<h3 class="title">Member Fee Details</h3>
+<hr>
+
+<a  routerLink="/add-reciept"><button style="height: 40px;" class="btn btn-success" > <p class="fa fa-user-plus">&nbsp;Generate Reciept</p> </button></a> 
+<br><br>
+<nz-table #basicTable>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Training</th>
+        <th>Plan</th>
+        <!-- <th>Actual Amount</th> -->
+        <th>Paid Amount</th>
+        <th>Paid Date</th>
+        <th>Balance Amount</th>
+        <!-- <th>Total Paid</th> -->
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of feedetails">
+        <td>{{ data.REC_ID }}</td>
+        <td>{{ data.NAME }}</td>
+        <td>{{ data.TRAINING }}</td>
+        <td>{{ data.PLAN  }}</td>
+        <!-- <td>{{ data.AMOUNT }}</td> -->
+        
+        <td style="color: green;">{{ data.PAID_AMOUNT}}</td>
+        <td>{{ data.PAID_DATE|date:'dd-MM-yyyy' }}</td>
+        <td style="color: red;">{{ data.BALANCE_AMOUNT }}</td>
+        <!-- <td>{{ data.TOTAL}}</td> -->
+        <td> 
+          <button nz-button (click)="GetReciept(data.REC_ID)">Print</button>
+        </td>
+       
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()">
+  <ng-template #modalTitle>
+    
+  </ng-template>
+
+  <ng-template #modalContent>
+    <form [formGroup]="recieptform" #updmem >
+
+
+
+      <!-- Modal body -->
+      <div *ngFor="let member of recdetails">
+        <div [hidden]="isupdated">
+
+          <input type="hidden" class="form-control" formControlName="mem_id" [(ngModel)]="member.mem_id">
+
+          <div class="form-group">
+            <table>
+              <tr>
+                <td>
+                  <label for="name" style="text-align: center"> Id</label>
+                  <input readonly type="text" class="form-control" formControlName="rec_id" [(ngModel)]="member.rec_id">
+                </td>
+                <td>
+                  <label for="name"> Name</label>
+                  <input readonly type="text" class="form-control" formControlName="rec_name" [(ngModel)]="member.rec_name">
+
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="name"> Training</label>
+                  <input readonly type="text" class="form-control" formControlName="rec_training" [(ngModel)]="member.rec_training">
+
+                </td>
+                <td>
+                  <label for="name"> Plan</label>
+                  <input readonly type="text" class="form-control" formControlName="rec_plan" [(ngModel)]="member.rec_plan">
+
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label for="name"> Paid Amount</label>
+                  <input readonly type="text" class="form-control" formControlName="paid_amount" [(ngModel)]="member.paid_amount">
+
+                </td>
+              
+            
+              
+                <td>
+                  <label for="name"> Paid Date</label>
+                  <input readonly type="date" class="form-control" formControlName="paid_date" [(ngModel)]="member.paid_date">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label for="name"> Balance Amount</label>
+                  <input readonly type="number" class="form-control" formControlName="balance_amount"
+                    [(ngModel)]="member.balance_amount">
+
+                </td>
+
+              
+             
+                <td>
+                  <label for="name">Total</label>
+                  <input readonly type="number" class="form-control" formControlName="total"
+                    [(ngModel)]="member.total">
+
+                </td>
+               
+              </tr>
+              <br>
+              
+            </table>
+          </div>
+
+
+          
+        </div>
+
+        <div  id="recDiv"  #MyDiv [hidden]="true"  class="invoice-box" style="background-color: blanchedalmond; ">
+          <table style="text-align: center;font-size: 50px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"  #content >
+              <tr class="top">
+                  <td>
+                    
+                      <table style="text-align:left; font-size: 50px; padding: 20px;">
+                          <tr>
+                              <td style="text-align: center;" class="title">
+                                <div style="text-align: center;">
+                                   <img src="assets/img/homelogo.jpg" style="width:100%; max-width:750px; align-items: center;"></div>
+                              </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               
+                          </tr>
+                          <tr></tr>
+                          <tr>
+                              <td>
+                                 <div style="font-size: 50px;" ><br>
+                                  Created: {{date|date:'dd-MM-yyyy'}}<br>
+                                </div>
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+              </tr>
+              
+              <tr  class="information">
+                  <td colspan="2">
+                      <table>
+                          <tr style="font-size: 40px;">
+                              <td style="padding: 20px;text-align: left;">
+                                  Health & Fitness.<br>
+                                  12345 Royal Plaza<br>
+                                  Mira Road, 401107<br>
+                                  
+                              </td>
+                              
+                              <td style="padding: 20px;text-align: right;">
+                                   
+                                Health & Fitness<br>
+                                Health&Fitness@gmail.com<br>
+                              </td>
+                          </tr>
+                      </table>
+                      <hr>
+                  </td>
+              </tr>
+              
+              <tr class="heading" style="font-weight: bold;">
+                <td >
+                     Member Id
+                </td>
+                
+                <td>
+                    {{member.mem_id}}
+                    
+                </td>
+                
+            </tr>
+            <tr class="heading" style="font-weight: bold;">
+              <td >
+                   Member Name
+              </td>
+              
+              <td>
+                  {{member.rec_name}}
+                  
+              </td>
+              
+          </tr>
+           
+              <tr class="heading">
+                
+                  <td style="text-align: left;">
+                    <hr>
+                      Payment Method :
+                  </td>
+                  
+                  <td>
+                    <hr>
+                      Cash 
+                  </td>
+              </tr>
+              
+              <tr class="details">
+                  <td style="text-align: left;">
+                    
+                      Cash :
+                  </td>
+                  
+                  <td>
+                    
+                      {{member.paid_amount}}
+                  </td>
+              </tr>
+              
+               <tr class="heading">
+                  <td style="text-align: left;">
+                    
+                      Training :
+                  </td>
+                  
+                  <td>
+                    {{member.rec_training}}
+                      
+                  </td>
+              </tr> 
+              
+               <tr class="item">
+                  <td style="text-align: left;">
+                    Actual Amount :
+                  </td>
+                  
+                  <td>
+                      {{member.rec_actualamount}}
+                  </td>
+              </tr><br> 
+              
+              
+              <tr>
+                <td style="text-align: left;">
+                  Balance Amount:
+                </td>
+                <td>
+                  {{member.balance_amount}}
+                </td>
+              </tr>
+          </table>
+        </div>
+        
+      </div>
+
+      <!-- Modal footer -->
+
+      <button type="submit" class="btn btn-success" [hidden]="isupdated" (click)="printComponent('recDiv')">Print</button>&nbsp;
+      
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+
+
+  </ng-template>
+</nz-modal>
+
+  <!-- pdf code -->
+ 
+
+ 

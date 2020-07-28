@@ -1,0 +1,225 @@
+<hr>
+<h3 class="title">Member Receipt</h3>
+<hr>
+<form  nz-form [formGroup]="validateForm2" class="login-form"  #savereciept [hidden]="false" >
+  <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="members" nzRequired>Members</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <nz-select (ngModelChange)="UpdateAmount($event)" [(ngModel)]="selectedName" nzShowSearch nzAllowClear formControlName="member_names" nzPlaceHolder="Select a name" >
+              <nz-option  *ngFor="let member of members" [nzLabel]="member.NAME" [nzValue]="member"></nz-option>
+            </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- <input type="hidden" class="form-control" formControlName="reciept_id" [(ngModel)]="member.mem_id"> -->
+
+    
+      
+        <input type="hidden" nz-input id="recid" [(ngModel)]="recid" formControlName="reciept_id"/>
+     
+   
+        <input type="hidden" nz-input id="rec_name" [(ngModel)]="recname"  />
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="memberid" nzRequired>Member ID</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input  nz-input id="memberid" [(ngModel)]="memid" formControlName="member_id"/>
+      </nz-form-control>
+    </nz-form-item>
+  
+  <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="membertraining" nzRequired>Training</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input readonly nz-input id="membertraining" [(ngModel)]="selectedTraining" formControlName="member_training"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="plan" nzRequired>Plan</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input nz-input id="plan" readonly [(ngModel)]="PlanType" formControlName="plan_type"/>
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="actualamount" nzRequired>Actual Amount</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input nz-input id="actualamount" readonly [(ngModel)]="ActualAmount" formControlName="actual_amount"/>
+      </nz-form-control>
+    </nz-form-item>
+
+   
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="paidamount" nzRequired>Paid Amount</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input type="number" nz-input id="paidamount"  (blur)="updateBalance(PaidAmount)" [(ngModel)]="PaidAmount" formControlName="paid_amount"/>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Date</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-date-picker [(ngModel)]="currentDate" formControlName="reciept_date"></nz-date-picker>
+      </nz-form-control>
+  </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="balanceamount" nzRequired>Balance Amount</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input readonly nz-input id="balanceamount"  [(ngModel)]="BalAmount" formControlName="balance_amount"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="total" nzRequired>Total</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" >
+        <input type="number" nz-input id="total" [(ngModel)]="TotalAmount" formControlName="total_amount"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <!-- <button nz-button (click)="IfExists()">Check</button>&nbsp;&nbsp; -->
+        <!-- <button (click)="printComponent('MyDIv')"  nz-button nzType="primary">Print</button>&nbsp;&nbsp; -->
+        <button  (click)="saveReciept(saveReciept)" [disabled]="!validateForm2.valid" nz-button  nzType="primary" >Save</button>&nbsp;&nbsp;
+        <!-- <button  nz-button (click)="updRec()" [disabled]="!validateForm2.valid" nzType="primary" >Update</button> -->
+      </nz-form-control>
+    </nz-form-item>
+
+</form>
+
+
+ <!-- pdf code -->
+ 
+
+ <div id="MyDIv"  #MyDiv [hidden]="true"  class="invoice-box" style="background-color: blanchedalmond; ">
+  <table style="text-align: center;font-size: 50px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"  #content >
+      <tr class="top">
+          <td>
+            
+              <table style="text-align:left; font-size: 50px; padding: 20px;">
+                  <tr>
+                      <td style="text-align: center;" class="title">
+                        <div style="text-align: center;">
+                           <img src="assets/img/homelogo.jpg" style="width:100%; max-width:750px; align-items: center;"></div>
+                      </td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       
+                  </tr>
+                  <tr></tr>
+                  <tr>
+                      <td>
+                         <div style="font-size: 50px;" ><br>
+                          Created: {{date|date:'dd-MM-yyyy'}}<br>
+                        </div>
+                      </td>
+                  </tr>
+              </table>
+          </td>
+      </tr>
+      
+      <tr  class="information">
+          <td colspan="2">
+              <table>
+                  <tr style="font-size: 40px;">
+                      <td style="padding: 20px;text-align: left;">
+                          Health & Fitness.<br>
+                          12345 Royal Plaza<br>
+                          Mira Road, 401107<br>
+                          
+                      </td>
+                      
+                      <td style="padding: 20px;text-align: right;">
+                           
+                        Health & Fitness<br>
+                        Health&Fitness@gmail.com<br>
+                      </td>
+                  </tr>
+              </table>
+              <hr>
+          </td>
+      </tr>
+      
+      <tr class="heading" style="font-weight: bold;">
+        <td >
+             Member Id
+        </td>
+        
+        <td>
+            {{memid}}
+            
+        </td>
+        
+    </tr>
+   
+      <tr class="heading">
+        
+          <td style="text-align: left;">
+            <hr>
+              Payment Method :
+          </td>
+          
+          <td>
+            <hr>
+              Cash 
+          </td>
+      </tr>
+      
+      <tr class="details">
+          <td style="text-align: left;">
+            
+              Cash :
+          </td>
+          
+          <td>
+            
+              {{PaidAmount}}
+          </td>
+      </tr>
+      
+      <tr class="heading">
+          <td style="text-align: left;">
+            
+              Training :
+          </td>
+          
+          <td>
+            {{selectedTraining}}
+              
+          </td>
+      </tr>
+      
+      <tr class="item">
+          <td style="text-align: left;">
+            Actual Amount :
+          </td>
+          
+          <td>
+              {{ActualAmount}}
+          </td>
+      </tr><br>
+      
+      <tr class="total">
+          <td style="text-align: left;">
+            Total Paid:
+          </td>
+          
+          <td>
+             {{TotalAmount}}
+          </td>
+          
+      </tr>
+      <tr>
+        <td style="text-align: left;">
+          Balance Amount:
+        </td>
+        <td>
+          {{BalAmount}}
+        </td>
+      </tr>
+  </table>
+</div>

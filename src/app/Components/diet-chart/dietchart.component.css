@@ -1,0 +1,26 @@
+nz-select {
+    margin: 0 8px 10px 0;
+    width: 243px;
+  }
+
+  .example-input .ant-input {
+    width: 180px;
+    margin: 0 8px 8px 0;
+  }
+
+  .calorie-form
+  {
+      max-width: 120px;
+  }
+
+nz-card
+{
+  font-size: xx-large;
+}
+
+  p
+  {
+    font-size: large;
+  }
+
+ 

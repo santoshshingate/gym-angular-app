@@ -1,0 +1,100 @@
+
+<!-- <ng-image-slider 
+[images]="imageObject"  >
+</ng-image-slider> -->
+<!-- <div>  
+    <div class="row">  
+      <div class="col-sm-12 btn btn-primary">  
+        Image Slider  
+      </div>  
+    </div>  
+  </div>   -->
+
+  <!-- <nz-carousel nzAutoPlay>
+    <div nz-carousel-content *ngFor="let index of images">
+      <img src="{{ index.img }}" width="100%">
+    </div>
+  </nz-carousel>
+   -->
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Galada">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ 
+   <hr>
+   
+  <div class="row">  
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">  
+      <div  ngxSlickItem *ngFor="let image of images" class="slide">  
+        <img src="{{ image.img }}" width="100%">  
+      </div>  
+    </ngx-slick-carousel> 
+    
+  </div><br><br><br>
+
+  
+    <div class="container" >
+      <div class="slogan" style="font-size: xx-large; font-family: Galada ; color:rgb(226, 77, 77); ">
+          <p class="text-center">" Fitness is not about being better than someone else...<br>It's about being better than you used to be. "</p>
+        </div>
+    </div>
+    <div class="container">
+     
+    </div>
+
+    <div class="container" style="align-items: center;">
+
+      <br>
+      <br>
+      <br>
+      <div style="text-align: center;font-size:xx-large;color: black;font-weight: bold;">Check BMI</div>
+      <br><br>
+      <div  style="text-align: center;">
+      <input type="text" name="weight" placeholder="Weight / Kg"  [(ngModel)]="weight" class="textbox ">&nbsp;&nbsp;&nbsp;
+      <input type="text" name="height" placeholder="height / meter" [(ngModel)]="height" class="textbox ">
+      <br><br>
+      <button class="button button3" (click)="determinateBmiLevel()">Calculate</button><br><br><p *ngIf="show">Your BMI is {{bmi | number:'1.2-2'}} <br> Level of BMI is {{condition}}.</p>
+      <!-- <h1>Your BMI is </h1> -->
+     
+  <br>
+    </div></div>
+
+    <div class="services">
+
+     
+     <nz-divider nzOrientation="left" style="font-size: xx-large;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" nzText="Services"></nz-divider>
+    <div nz-row [nzGutter]="16"  >
+      <div nz-col class="gutter-row" [nzSpan]="6">
+        <div  class="zoom" style="text-align: center;">
+          <img height="200px" width="340px" src="assets/img/MuscleBuilding.jpg" > Muscle Building
+          
+      </div>
+      </div>
+      
+      <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="zoom" style="text-align: center;" >
+          <img height="200px" width="340px" src="assets/img/yoga.jpg">Yoga
+        </div>
+      </div>
+      <div nz-col class="gutter-row" [nzSpan]="6">
+        <div class="zoom" style="text-align: center;">
+          <img height="200px" width="340px" src="assets/img/crossfit.jpg">Cross Fit</div></div>
+
+          <div nz-col class="gutter-row" [nzSpan]="6">
+            <div class="zoom" style="text-align: center;" >
+              <img height="200px" width="340px" src="assets/img/weightloss.jpg">Weight Loss
+            </div>
+          </div>
+      
+    </div>
+      </div>
+   
+
+  <hr>
+  <div  style="text-align: center;">
+    <p style="color: blue;" class="mar0 brand-color fw-600">© Copyright Health & Fitness 2020. All Right Reserved | <a style="color: red;" class="brand-color"  target="_blank">Designed with <i class="fa fa-heart"></i> </a></p>
+    <!-- Designed with <i class="fa fa-heart" style= "color:red "></i> -->
+    </div>
+
+    
+  
+

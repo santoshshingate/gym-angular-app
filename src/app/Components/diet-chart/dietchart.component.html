@@ -1,0 +1,594 @@
+<br>
+
+
+
+    <div style="font-size:xx-large">Diet Chart</div>
+
+<hr>
+
+
+    <nz-input-group>
+        <div class="example-input">
+            <input nz-input  [(ngModel)]="calcount" placeholder="Calories" nzSize="default">
+            <button nz-button nzType="primary"  nzShape="circle" (click)="showModal()">?</button>
+        </div>
+    </nz-input-group>
+
+    <nz-select nzPlaceHolder="Select your Goal" [(ngModel)]="weight_type">
+        <nz-option nzValue="Weight Loss" nzLabel="Weight Loss"></nz-option>
+        <nz-option nzValue="Maintain Weight" nzLabel="Maintain Weight"></nz-option>
+        <nz-option nzValue="Weight Gain" nzLabel="Weight Gain"></nz-option>
+
+    </nz-select><br>
+    <button nz-button nzType="primary" (click)="showdiet()">Calculate</button>
+
+
+<br><br>
+<div>
+<div *ngIf="showdiv1" >
+    <nz-card style="width:600px;" nzTitle="Breakfast" >
+        <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Orange-Vanilla Protein Smoothie(390 calories)</p>
+       
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Chicken and vegetable salad (404 calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;white rice & Soyabeans(200 calories)</p>
+        
+      </nz-card>
+</div>
+
+<div *ngIf="showdiv2"  >
+    <nz-card style="width:600px;"  nzTitle="BREAKFAST" >
+        <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;1 bowl Cinnamon Honey Corn Flakes(305 Calories)</p>
+    
+    </nz-card><br>
+    <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Banana smoothie (300 calories)</p>   
+      
+      </nz-card>  
+       
+     <br>
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Stir Fried Mixed Veggies in Soy Sauce(332 calories)<br>2 Boiled Egg(143 Calories)
+    </p>
+        </nz-card>
+     <br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;1 bowl Honey Grapefruit with Banana and Strawberries(162 Calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;2 cheese slice (230 Calories)</p>
+      </nz-card>
+</div>
+<div *ngIf="showdiv3" >
+    <nz-card style="width:600px;" nzTitle="BREAKFAST" >
+        <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Peanut butter and jelly(371 Calories)</p>
+       
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Tomato and Cheese Wrap(319 Calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;2 Oranges(123 Calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Pasta Caprice(363 Calories)</p>
+        
+      </nz-card>
+</div>
+
+<div *ngIf="showdiv4" >
+    <nz-card style="width:600px;" nzTitle="Breakfast" >
+        <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Sweet Potato Hash & 1 orange(365 Calories)</p>
+       
+      </nz-card><br>
+     
+      
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Easy Grilled Chicken(416 Calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;4 slice Melons(79 Calories) </p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Pasta with Red Sauce and Mozzarella(309 Calories)</p>
+        
+      </nz-card>
+</div>
+
+<div *ngIf="showdiv5" >
+    <nz-card style="width:600px;" nzTitle="Breakfast" >
+        <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Peanut Butter and Banana Shake(304 Calories)</p>
+       
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Almonds(164 Calories)</p>       
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;2 Oranges(123 Calories)</p>
+         
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Chicken and vegetable salad (404 calories)</p>
+        
+      </nz-card>
+</div>
+
+<div *ngIf="showdiv6" >
+    <nz-card style="width:600px;" nzTitle="Breakfast" >
+     <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Multi-grain Toast with Almond Butter and Honey (434 Calories)</p>
+       
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="LUNCH" >
+        <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Tomato and Cheese Wrap(319 Calories) </p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="SNACKS" >
+        <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;2 Boiled eggs(156 Calories) </p>
+        
+      </nz-card><br>
+      <nz-card style="width:600px;" nzTitle="DINNER">
+        <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Easy Grilled Chicken(416 Calories)</p>
+        
+      </nz-card>
+</div>
+<div *ngIf="showdiv7" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Peanut Butter and Banana Shake(304 Calories)</p>
+   
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;2 Oranges(123 Calories)</p>
+     
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Chicken and vegetable salad (404 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv8" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Banana smoothie (300 calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Almonds(164 Calories)</p>       
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;2 Oranges(123 Calories)</p>
+     
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Hot Garlic Chicken Salad(527 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv9" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Banana Oat cake & 2 orange(596 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Yogurt with walnuts and honey(260 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;BBQ Chicken Sandwich - half size(235 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv10" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Banana Oat cake & 2 orange(596 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Yogurt with walnuts and honey(260 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;BBQ Chicken Sandwich - half size(235 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv11" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Cottage Cheese and almonds - 1 serving(376 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Cabbage Salad (164 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 veg hummus sandwich(466 Calories)</p>
+    
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Egg,Cheese and raddish - 1 serving (624 calories)</p>
+    
+  </nz-card>
+
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;1 Apples (95 Calories)</p>       
+  </nz-card><br>
+</div>
+
+<div *ngIf="showdiv12" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Dosa & Peanut Chutney(300 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Roasted Peanut and Strawberries & 1 cup milk(260 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;3 Roti ,chana ,bhindi,curd(560 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Milk,Almond,Papaya,cashew(285 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Kichdi,curd,spinach(305 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv13" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Dosa & Peanut Chutney(300 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Roasted Peanut and Strawberries & 1 cup milk(260 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;3 Roti ,chana ,bhindi,curd(560 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Milk,Almond,Papaya,cashew(285 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Kichdi,curd,spinach(305 calories)</p>
+    
+  </nz-card>
+</div>
+
+<div *ngIf="showdiv14" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Pinacolada smoothie(498 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Peanut buter and celery (209 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Chicken and curd with banana - 1serving each(580 Calories)</p>
+    
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Roasted brocolli and cheese sandwich (697 calories)</p>
+    
+  </nz-card>
+
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;yogurt and Strawberries (182 Calories)</p>       
+  </nz-card><br>
+</div>
+
+<div *ngIf="showdiv15" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Oat meal and one Apple(449 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;yogurt and banana(239 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Chocolate avocado pudding(509 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;cornflakes- 1/2 bowl(111 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Chicken korma & red lentil daal(612 calories)</p>
+    
+  </nz-card>
+
+
+</div>
+
+<div *ngIf="showdiv16" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Cinnamon raisin Oatmeal(535 Calories)</p>
+   
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Peanut butter and Banana Toast(278 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;Tuna sandwich(445 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Banana smoothie(225 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;BBQ chicken salad(517 calories)</p>
+    
+  </nz-card>
+
+  
+</div>
+
+<div *ngIf="showdiv17" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;1 cup strawberry & egg scramble 2 wraps(560 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;greek yogurt 2 cup and 2 banana(488 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;3 Roti ,chana ,bhindi,curd(560 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;chocolate avocado pudding(255 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;sausage and potato skillet - 1 serving(774 calories)</p>
+    
+  </nz-card>
+
+  
+</div>
+
+<div *ngIf="showdiv18" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Peanut butter & Raspberry oatmeal(554 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;yogurt and banana(239 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;granola- 1 bowl & 2 banana(477 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Pan fried lemon chicken(612 calories)</p>
+    
+  </nz-card>
+
+  
+</div>
+
+<div *ngIf="showdiv19" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Chocolate Banana Oatmeal(557 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Mango Trifle and 1 banana(286 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp;2 Roti and Green Beans with Olive Oil(440 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;granola- 1 bowl &  fruit smoothie(530 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Pan fried lemon chicken(612 calories)</p>
+    
+  </nz-card>
+  
+
+</div>
+
+<div *ngIf="showdiv20" >
+  <nz-card style="width:600px;" nzTitle="BREAKFAST" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Breakfast Oatmeal with Milk and Blueberries(723 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Mango Trifle and 1 banana(286 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp; Pasta with Marinara Sauce(516 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Coconut Milk Protein Shake(720 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Grilled Chicken Thighs(704 calories)</p>
+    
+  </nz-card>
+  
+
+</div>
+
+<div *ngIf="showdiv21" >
+  <nz-card style="width:600px;" nzTitle="Breakfast" >
+   
+    <p><img height="70px" width="70px" src="assets/img/breakfast.png">&nbsp;Ham and veggie omlet(642 Calories)</p>
+   
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;Mango Trifle and 2 banana(386 Calories)</p>       
+  </nz-card><br>
+
+  <nz-card style="width:600px;" nzTitle="LUNCH" >
+    <p><img height="70px" width="70px" src="assets/img/lunch.png">&nbsp; chocolate milkshake - 2 servings(648 Calories)</p>
+    
+  </nz-card><br>
+  <nz-card style="width:600px;" nzTitle="SNACKS" >
+    <p><img height="70px" width="70px" src="assets/img/Snacks-Icon.png">&nbsp;hazlenut and banana sushi(340 Calories)</p>       
+  </nz-card><br>
+  
+  <nz-card style="width:600px;" nzTitle="DINNER">
+    <p><img height="70px" width="70px" src="assets/img/dinner.png">&nbsp;Spinach almond salad(719 calories)</p>
+    
+  </nz-card>
+  
+
+</div>
+
+</div>
+<!-- modal -->
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        Count your Calories
+    </ng-template>
+
+
+
+    <ng-template  #modalContent>
+
+        <form class="back" nz-form [formGroup]="validateCalories">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-select nzShowSearch nzAllowClear formControlName="member_gender" nzPlaceHolder="Select a gender"
+                        [(ngModel)]="selectedGender">
+                        <nz-option nzLabel="Male" nzValue="male"></nz-option>
+                        <nz-option nzLabel="Female" nzValue="female"></nz-option>
+
+                    </nz-select>
+
+                </nz-form-control>
+            </nz-form-item>
+
+
+            <nz-form-item>
+                <nz-form-control class="calorie-form">
+
+                    Height :<input formControlName="member_height" [(ngModel)]="height" placeholder="in cm" />
+
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control class="calorie-form">
+
+                    Weight :<input formControlName="member_weight" [(ngModel)]="weight" placeholder=" in kg's" />
+
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control class="calorie-form">
+
+                    Age :<input formControlName="member_age" [(ngModel)]="age" placeholder="Enter Age" />
+
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control>
+                    Activity Level :<br>
+                    <nz-select nzPlaceHolder="Select Activity level" formControlName="member_activity"
+                        [(ngModel)]="activity">
+                        <nz-option nzValue="sedentary" nzLabel="Sedentary"></nz-option>
+                        <nz-option nzValue="lightly active" nzLabel="Lightly Active"></nz-option>
+                        <nz-option nzValue="moderately active" nzLabel="Moderately Active"></nz-option>
+                        <nz-option nzValue="very active" nzLabel="Very Active"></nz-option>
+                        <nz-option nzValue="super active" nzLabel="Super Active"></nz-option>
+
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control>
+                    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>&nbsp;
+                    <button nz-button nzType="primary" (click)="CalBMR()">Calculate</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-template>
+
+    <ng-template #modalFooter>
+
+
+    </ng-template>
+</nz-modal>

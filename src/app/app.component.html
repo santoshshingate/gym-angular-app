@@ -1,0 +1,53 @@
+<nz-layout>
+  <nz-header>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" style="font-size:large;">
+      <img class="homelogo" src="assets/img/homelogo.jpg">&nbsp;
+      <li nz-menu-item routerLink="home" ><p class="fa fa-home">  Home</p></li>
+      
+
+      <li *ngIf="authservice.isUserLoggedIn()" nz-menu-item routerLink="view-member"><p class="fa fa-users"> Member </p></li>
+      
+     
+      <li *ngIf="authservice.isUserLoggedIn()" nz-menu-item routerLink="view-reciept"><p class="fa fa-vcard-o"> Reciept </p></li>
+      <!-- <li *ngIf="!authservice.isUserLoggedIn()" nz-menu-item routerLink="check-bmi"><p 	class="fa fa-tachometer"> Check BMI </p></li> -->
+      <li *ngIf="!authservice.isUserLoggedIn()" nz-menu-item routerLink="about-us"><p class="fa fa-user-circle" > About Us </p></li>
+      <li *ngIf="!authservice.isUserLoggedIn()" nz-menu-item routerLink="diet-chart"><p class="fa fa-calendar"> Diet Chart</p></li>
+       
+      <li *ngIf="!authservice.isUserLoggedIn()" nz-menu-item routerLink="login"><p class="fa fa-unlock"> Sign In </p></li>
+      <li *ngIf="authservice.isUserLoggedIn()" nz-menu-item routerLink="add-training"><p class="fa fa-child"> Training </p></li>
+      <li *ngIf="authservice.isUserLoggedIn()" nz-menu-item routerLink="add-admin"><p class="fa fa-user"> Admin </p></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <a class="icons-list" *ngIf="authservice.isUserLoggedIn()"> Welcome {{displayusername}}!!
+        
+          <i nz-icon [nzType]="'check-circle'" [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"></i>
+        
+       </a>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <li *ngIf="!authservice.isUserLoggedIn()" class="list-inline-item"><a href="" target="_blank"><i  class="fa fa-facebook"></i></a></li>&nbsp;&nbsp;
+      <li *ngIf="!authservice.isUserLoggedIn()" class="list-inline-item"><a href="" target="_blank"><i style="color: whitesmoke;" class="fa fa-twitter"></i></a></li>&nbsp;&nbsp;
+      <li *ngIf="!authservice.isUserLoggedIn()" class="list-inline-item"><a href="" target="_blank"><i style="color:rgba(155, 103, 160, 0.925);" class="fa fa-instagram"></i></a></li>&nbsp;&nbsp;
+      <li *ngIf="!authservice.isUserLoggedIn()" class="list-inline-item"><a href="" target="_blank"><i style="color: red;" class="fa fa-youtube"></i></a></li>
+
+      <li *ngIf="authservice.isUserLoggedIn()" class="lang-icon" nz-menu-item routerLink="logout"><p class="fa fa-unlock-alt">  Sign Out</p></li>
+
+
+    </ul>
+  </nz-header>
+  <nz-content>
+
+    <!-- <div class="inner-content"> -->
+
+    <router-outlet></router-outlet>
+    <!-- </div> -->
+  </nz-content>
+  <!-- <nz-footer>
+    <div>
+      
+      </div>
+  </nz-footer> -->
+</nz-layout>

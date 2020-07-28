@@ -1,0 +1,93 @@
+.carousel {  
+    width: 85%; 
+    height: 10%; 
+    margin: auto;  
+  }
+  
+  
+  [nz-carousel-content] {
+    text-align: center;
+    height: 300px;
+    line-height: 160px;
+    background: #364d79;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .zoom:hover {
+    /* -ms-transform: scale(0.5);  */
+    /* -webkit-transform: scale(0.5); Safari 3-8 */
+    transform: scale(1.1); 
+    transition: transform .2s; 
+    text-align: center;
+    color: red;
+    font-size: x-large;
+    font-family: "Montserrat" ;
+  }
+  
+ .text-center
+ {position: relative;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-direction: alternate;
+ }
+ @keyframes example {
+  from   {  top: 60px;}
+  to  { top:0px;}
+ 
+}
+  
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 42px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 1px;
+  outline: none;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  
+}
+
+.button3 {
+  background-color:transparent ; 
+  color:black; 
+  border: 2px solid black;
+  border-radius:30px;
+}
+
+.button3:hover {
+  background-color:coral;
+  color:black;
+  border-radius: 30px;
+  border:solid coral ;
+}
+
+.textbox
+{
+  margin: auto;
+  outline: none;
+  width: 20%;
+  border: 2.0px solid black;
+  padding: 10px;
+  border-collapse: inherit;
+  border-radius: 30px;
+  background-color: transparent;
+}
+
+.textbox1:hover {
+  background-color:coral;
+  color:black;
+  border-radius: 30px;
+}
+
+.p{
+  visibility: visible;
+}
+

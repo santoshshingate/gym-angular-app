@@ -1,0 +1,222 @@
+
+
+
+<!-- modal -->
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        Create Admin
+    </ng-template>
+
+    <ng-template  #modalContent>
+
+<form nz-form [formGroup]="validateForm" class="login-form"  #saveadmin (ngSubmit)="saveAdmin()">
+    
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Name</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Name!">
+          <input nz-input formControlName="admin_name" id="admin_name" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="At least 8 characters in length ,
+        Lowercase letters ,
+        Uppercase letters ,
+        Numbers ,
+        Special characters">
+          <input nz-input type="password" id="password" [pattern]="unamePattern"  formControlName="admin_pass" />
+          
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item nz-row class="Save">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button  [disabled]="!validateForm.valid" nzType="primary">Save</button>&nbsp;
+          
+        </nz-form-control>
+      </nz-form-item>
+    
+
+</form>
+</ng-template>
+
+<ng-template #modalFooter>
+
+
+</ng-template>
+</nz-modal>
+<br><br>
+<button (click)="showModal()" style="height: 40px;" class="btn btn-success" > <p class="fa fa-user-plus">&nbsp;New Admin</p> </button>
+<br><br>
+
+
+<h4  class="title">Admin List</h4>
+    <nz-table #smallTable nzSize="small" [nzData]="adminlist">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of smallTable.data">
+          <td>{{ data.uname }}</td>
+          <button  nz-button [nzType]="'primary'" (click)="updateAdmin(data.logid)"  data-toggle="modal"
+          data-target="#myModal">Update</button>&nbsp;
+
+          <button nz-button [nzType]="'danger'" (click)="updateAdmin(data.logid)" data-toggle="modal"
+          data-target="#myModal1" >Delete</button>
+        </tr>
+      </tbody>
+    </nz-table>
+
+
+     <!-- update   -->
+     <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form [formGroup]="validateAdminUpdate" #updadmin (ngSubmit)="UpdateAdmin(updadmin)">
+           
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center">Update Admin</h4>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let list of AdminData ">
+              <div [hidden]="isupdated">
+
+                <input type="hidden" class="form-control" formControlName="login_id" [(ngModel)]="list.logid">
+              
+                
+                 
+              
+                  <div class="form-group">
+                    <nz-form-label  nzRequired>User Name</nz-form-label>
+                    
+                    <input type="text" class="form-control" formControlName="admin_username" [(ngModel)]="list.uname">
+                  </div>
+                
+               
+               
+
+            
+               
+                  <!-- <nz-form-label  nzFor="admin_p" nzRequired></nz-form-label>
+                   -->
+                  
+                    <input nz-input type="hidden" id="admin_p" formControlName="admin_p" [(ngModel)]="list.password" (ngModelChange)="updateConfirmValidator()" />
+                
+               
+                <nz-form-item>
+                  <nz-form-label  nzFor="admin_old_pass" nzRequired>Old Password</nz-form-label>
+                  <nz-form-control  [nzErrorTip]="errorTpl">
+                    <input nz-input type="password" formControlName="admin_old_pass" id="admin_old_pass" />
+                    <ng-template #errorTpl let-control>
+                      <ng-container *ngIf="control.hasError('required')">
+                        Please confirm your password!
+                      </ng-container>
+                      <ng-container *ngIf="control.hasError('confirm')">
+                       Password does not match !
+                      </ng-container>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <div class="form-group">
+                  <nz-form-label  nzRequired >New Password</nz-form-label>
+                  
+                  <input type="text" class="form-control" formControlName="admin_new_pass" [(ngModel)]="NewPassword">
+                </div>
+              </div>
+               
+
+              <div [hidden]="!isupdated">
+                <h4>Admin Detail Updated!</h4>
+              </div>
+
+            </div>
+            
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" [disabled]="!validateAdminUpdate.valid" [hidden]="isupdated">Update</button>&nbsp;
+              <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="changeisUpdate()">Close</button>
+            </div>
+
+          </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- delete modal   -->
+
+<div class="modal" id="myModal1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="validateAdminDelete" (ngSubmit)="submitForm1()">
+       
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-align: center">Delete Admin</h4>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" *ngFor="let lists of AdminData ">
+          <div [hidden]="isupdatednew">
+
+            <input type="hidden" class="form-control" formControlName="login_id" [(ngModel)]="lists.logid">
+          
+     
+           
+              <!-- <nz-form-label  nzFor="admin_p" nzRequired></nz-form-label>
+               -->
+
+                <input nz-input  type="hidden" id="admin_p" formControlName="admin_p" [(ngModel)]="lists.password" (ngModelChange)="updateConfirmValidator()" />
+            
+           
+            <nz-form-item>
+              <nz-form-label  nzFor="admin_old_pass" nzRequired>Current Password</nz-form-label>
+              <nz-form-control  [nzErrorTip]="errorTpl">
+                <input nz-input type="password" formControlName="admin_old_pass" id="admin_old_pass" />
+                <ng-template #errorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Please confirm your password!
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('confirm')">
+                   Password does not match !
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            
+          </div>
+           
+
+          <div [hidden]="!isupdatednew">
+            <h4>Admin Detail Deleted!</h4>
+          </div>
+
+        
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [disabled]="!validateAdminDelete.valid" (click)="deleteAdmin(lists.logid)" [hidden]="isupdatednew">Delete</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"
+            (click)="changeisUpdateNew()">Close</button>
+        </div>
+      </div>
+      </form>
+      </div>
+    </div>
+  </div>

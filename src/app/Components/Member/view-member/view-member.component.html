@@ -1,0 +1,329 @@
+<hr>
+<h2>Welcome <b style="color: green;"> {{displayusername}}</b>&nbsp;&nbsp;</h2>
+<hr>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 style="text-align: center">Members</h1><br>
+    <div class="activeusers">
+      <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="12">
+          <nz-statistic [nzValue]="(membercount | number)!" [nzTitle]="'Active Members'"></nz-statistic>
+        </nz-col>
+      </nz-row>
+    </div>
+    <br>
+    <br>
+    <!-- <div class="row" [hidden]="!deleteMessage">
+  
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Member Data Deleted</strong>
+          </div>
+        </div> -->
+    <div class="col-sm-4"></div>
+  </div>
+</div>
+
+<a routerLink="/add-member"><button style="height: 40px;" class="btn btn-success">
+    <p class="fa fa-user-plus">&nbsp;New Member</p>
+  </button></a>
+
+<br><br>
+
+<div class="search-hero">
+  <div class="panel-body">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+      placeholder="&#61442;  Start searching ...">
+  </div>
+  <nz-table class="table table-hover table-sm">
+    <thead>
+      <tr>
+
+        <th>Member id</th>
+        <th>Member Name</th>
+        <th> Address</th>
+        <th> Dob</th>
+        <th> Contact</th>
+        <th> Start Date</th>
+
+        <th> End Date</th>
+        <th> Training</th>
+        <th>Plan</th>
+        <th> Amount</th>
+
+
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let member of members  | filter:searchText">
+        <td>{{member.mem_id}}</td>
+        <td>{{member.name}}</td>
+        <td>{{member.address}}</td>
+        <td>{{member.dob|date:'dd-MM-yyyy'}}</td>
+        <td>{{member.contact}}</td>
+        <td>{{member.start_date|date:'dd-MM-yyyy'}}</td>
+        <td>{{member.end_date|date:'dd-MM-yyyy'}}</td>
+        <td>{{member.training}}</td>
+        <td>{{member.plan}}</td>
+        <td>{{member.amount}}</td>
+
+        <td>
+          <button (click)="updateMember(member.mem_id)" class='btn btn-primary'><i
+              class="fa fa-futboll-0">Update</i></button> &nbsp;
+
+          <button (click)="showDeleteConfirm(member.mem_id)" class='btn btn-danger'><i class="fa fa-futboll-0"> Delete
+            </i></button>
+        </td>
+      </tr>
+    </tbody><br>
+  </nz-table>
+
+
+
+  <!-- modal -->
+
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+      Update Member
+    </ng-template>
+
+    <ng-template #modalContent>
+      <form [formGroup]="memberupdateform" #updmem (ngSubmit)="updateMem(updmem)">
+
+
+
+        <!-- Modal body -->
+        <div *ngFor="let member of memberslist">
+          <div [hidden]="isupdated">
+
+            <input type="hidden" class="form-control" formControlName="mem_id" [(ngModel)]="member.mem_id">
+
+            <div class="form-group">
+              <table>
+                <tr>
+                  <td>
+                    <label for="name" style="text-align: center"> Name</label>
+                    <input type="text" class="form-control" formControlName="mem_name" [(ngModel)]="member.name">
+                  </td>
+                  <td>
+                    <label for="name"> Address</label>
+                    <input type="text" class="form-control" formControlName="mem_address" [(ngModel)]="member.address">
+
+                  </td>
+                </tr>
+                <br>
+                <tr>
+                  <td>
+                    <label for="name"> DOB</label>
+                    <input type="date" class="form-control" formControlName="mem_dob" [(ngModel)]="member.dob">
+                  </td>
+                  <td>
+                    <label for="name"> Contact</label>
+                    <input type="number" class="form-control" formControlName="mem_contact"
+                      [(ngModel)]="member.contact">
+
+                  </td>
+
+                </tr>
+                <br>
+                <tr>
+                  <td>
+                    <label for="name"> Start Date</label>
+                    <input type="date" class="form-control" formControlName="mem_start_date"
+                      [(ngModel)]="member.start_date">
+
+                  </td>
+                  <td>
+                    <label for="name"> End Date</label>
+                    <input type="date" class="form-control" formControlName="mem_end_date"
+                      [(ngModel)]="member.end_date">
+
+                  </td>
+                </tr>
+                <br>
+                <tr>
+                  <td>
+                    <!-- <label for="name"> Training</label> -->
+                    <!-- <input type="text" class="form-control" formControlName="mem_training"
+                  [(ngModel)]="member.training"> -->
+                    <!-- <nz-select nzShowSearch nzAllowClear formControlName="mem_training"
+                       (ngModelChange)="changeTraining($event)"
+                      [(ngModel)]="selectedTraining">
+                      <nz-option *ngFor="let training of types" [nzLabel]="training.training_type" [nzValue]="training">
+                      </nz-option>
+                    </nz-select>
+                  </td> -->
+                  <nz-form-item>
+                    <nz-form-label  nzRequired nzFor="member_training">Training</nz-form-label>
+                    <nz-form-control >
+                      <nz-select nzShowSearch nzAllowClear formControlName="mem_training" nzPlaceHolder="{{member.training}}"
+                        (ngModelChange)="changeTraining($event)" [(ngModel)]="selectedTraining" >
+                        <nz-option *ngFor="let training of types" [nzLabel]="training.training_type" [nzValue]="training">
+                        </nz-option>
+                      </nz-select>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <td> 
+                    <nz-form-item>
+                    <!-- <input type="text" class="form-control" formControlName="mem_plan" [(ngModel)]="member.plan"> -->
+                    <nz-form-label  nzRequired nzFor="plan">Plan</nz-form-label>
+                    <nz-form-control >
+                    <nz-select nzShowSearch nzAllowClear formControlName="mem_plan" nzPlaceHolder="{{member.plan}}"
+                      (ngModelChange)="changePlan($event)" [(ngModel)]="selectedPlan">
+                      <nz-option nzLabel="Monthly" nzValue="Monthly"></nz-option>
+                      <nz-option nzLabel="Quarterly" nzValue="Quarterly"></nz-option>
+                      <nz-option nzLabel="Yearly" nzValue="Yearly"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                  </nz-form-item>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+            <div class="form-group">
+              <!-- <label for="name">Amount</label>
+              <input type="text" class="form-control" formControlName="mem_amount" placeholder="{{member.amount}}" [(ngModel)]="fees" > -->
+              <nz-form-item>
+                <nz-form-label nzRequired nzFor="member_amount">Amount</nz-form-label>
+                <nz-form-control  nzErrorTip="The input is not valid Amount">
+                  <input readonly nz-input placeholder="{{member.amount}}" formControlName="mem_amount"  [(ngModel)]="fees" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- Modal footer -->
+
+        <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>&nbsp;
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="handleCancel()">Close</button>
+
+
+      </form>
+    </ng-template>
+
+    <ng-template #modalFooter>
+
+
+    </ng-template>
+  </nz-modal>
+
+
+
+  <!-- <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form [formGroup]="memberupdateform" #updmem (ngSubmit)="updateMem(updmem)"> -->
+
+          <!-- Modal Header -->
+          <!-- <div class="modal-header">
+            <h4 class="modal-title" style="text-align: center">Update Member</h4> -->
+
+          <!-- </div> -->
+
+          <!-- Modal body -->
+          <!-- <div class="modal-body" *ngFor="let member of memberslist">
+            <div [hidden]="isupdated">
+
+              <input type="hidden" class="form-control" formControlName="mem_id" [(ngModel)]="member.mem_id">
+
+              <div class="form-group">
+                <table>
+                  <tr>
+                    <td>
+                      <label for="name" style="text-align: center">Member Name</label>
+                      <input type="text" class="form-control" formControlName="mem_name" [(ngModel)]="member.name">
+                    </td>
+                    <td>
+                      <label for="name">Member Address</label>
+                      <input type="text" class="form-control" formControlName="mem_address"
+                        [(ngModel)]="member.address">
+
+                    </td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <td>
+                      <label for="name">Member DOB</label>
+                      <input type="date" class="form-control" formControlName="mem_dob" [(ngModel)]="member.dob">
+                    </td>
+                    <td>
+                      <label for="name">Member Contact</label>
+                      <input type="number" class="form-control" formControlName="mem_contact"
+                        [(ngModel)]="member.contact">
+
+                    </td>
+
+                  </tr>
+                  <br>
+                  <tr>
+                    <td>
+                      <label for="name">Member Start_Date</label>
+                      <input type="date" class="form-control" formControlName="mem_start_date"
+                        [(ngModel)]="member.start_date">
+
+                    </td>
+                    <td>
+                      <label for="name">Member End_Date</label>
+                      <input type="date" class="form-control" formControlName="mem_end_date"
+                        [(ngModel)]="member.end_date">
+
+                    </td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <td>
+                      <label for="name">Member Training</label>
+                      <input type="text" class="form-control" formControlName="mem_training"
+                        [(ngModel)]="member.training"> -->
+                      <!-- <nz-select nzShowSearch nzAllowClear formControlName="mem_training" nzPlaceHolder="{{member.training}}"
+                          (ngModelChange)="changeTraining($event)" [(ngModel)]="selectedTraining" >
+                          <nz-option *ngFor="let training of types" [nzLabel]="training.training_type" [nzValue]="training">
+                          </nz-option>
+                        </nz-select> -->
+                    <!-- </td>
+                    <td> <label for="name">Plan</label>
+                      <input type="text" class="form-control" formControlName="mem_plan" [(ngModel)]="member.plan"> -->
+                      <!-- <nz-select nzShowSearch nzAllowClear formControlName="member_plan" nzPlaceHolder="{{member.plan}}"
+              (ngModelChange)="changePlan($event)" [(ngModel)]="selectedPlan">
+              <nz-option nzLabel="monthly" nzValue="monthly"></nz-option>
+              <nz-option nzLabel="quarterly" nzValue="quarterly"></nz-option>
+              <nz-option nzLabel="yearly" nzValue="yearly"></nz-option>
+            </nz-select> -->
+                    <!-- </td>
+                  </tr>
+                </table>
+              </div> -->
+
+
+              <!-- <div class="form-group">
+                <label for="name">Amount</label>
+                <input type="text" class="form-control" formControlName="mem_amount" [(ngModel)]="member.amount">
+              </div>
+            </div>
+            <div [hidden]="!isupdated">
+              <h4>Member Detail Updated!</h4>
+            </div>
+
+          </div> -->
+
+          <!-- Modal footer -->
+          <!-- <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+          </div> -->
+
+        <!-- </form>
+      </div>
+    </div>
+  </div> -->

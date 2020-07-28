@@ -1,0 +1,151 @@
+<br><br>
+<button (click)="showModal()" style="height: 40px;" class="btn btn-success" > <p class="fa fa-user-plus">&nbsp;New Training</p> </button>
+<br><br>
+
+<!-- modal -->
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+        Add New Training
+    </ng-template>
+
+    <ng-template  #modalContent>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="saveTraining(saveTraining)">
+<div>
+    <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="memberid" nzRequired>Training Type</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input type="text" nz-input id="training_type"  formControlName="training_type"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="memberid" nzRequired>Monthly</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input type="number" nz-input id="monthly"  formControlName="monthly"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="memberid" nzRequired>Quarterly</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input type="number" nz-input id="quarterly"  formControlName="quarterly"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="memberid" nzRequired>Yearly</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" >
+          <input type="number" nz-input id="yearly"  formControlName="yearly"/>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button nz-button  nzType="primary" [disabled]="!validateForm.valid">Save
+        </button>
+        </nz-form-control>
+          </nz-form-item>
+
+      
+    </div>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+  
+  
+  </ng-template>
+  </nz-modal>
+<hr>
+    <h4>Training List</h4>
+   <hr>
+    <nz-table #smallTable nzSize="small" [nzData]="trainings">
+      <thead>
+        <tr>
+          <th>Training-Type</th>
+          <th>Monthly</th>
+          <th>Quarterly</th>
+          <th>Yearly</th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of smallTable.data">
+          <td>{{ data.training_type }}</td>
+          <td>{{ data.monthly }}</td>
+          <td>{{ data.quarterly }}</td>
+          <td>{{ data.yearly }}</td>
+          <button  nz-button [nzType]="'primary'" (click)="updateTraining(data.training_id)"  data-toggle="modal"
+          data-target="#myModal">Update</button>&nbsp;
+          <button  nz-button [nzType]="'danger'" (click)="showDeleteConfirm(data.training_id)" >Delete</button>
+        </tr>
+      </tbody>
+    </nz-table>
+
+    <!-- update   -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form [formGroup]="validateUpdate" #updtrain (ngSubmit)="updateTrain(updtrain)">
+           
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title" style="text-align: center">Update Training</h4>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body" *ngFor="let list of trainlist ">
+              <div [hidden]="isupdated">
+
+                <input type="hidden" class="form-control" formControlName="t_id" [(ngModel)]="list.training_id">
+                <div class="form-group">
+                  <label for="name">Training Type</label>
+                  <input type="text" class="form-control" formControlName="train_type" [(ngModel)]="list.training_type">
+                </div>
+
+                <div class="form-group">
+                  <label for="name">Monthly</label>
+                  <input type="text" class="form-control" formControlName="month" [(ngModel)]="list.monthly">
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="name">Quartely</label>
+                  <input type="text" class="form-control" formControlName="quarter" [(ngModel)]="list.quarterly">
+                </div>
+              
+
+              <div class="form-group">
+                <label for="name">Yearly</label>
+                <input type="text" class="form-control" formControlName="year" [(ngModel)]="list.yearly">
+              </div>
+            </div>
+
+              <div [hidden]="!isupdated">
+                <h4>Training Detail Updated!</h4>
+              </div>
+
+            </div>
+            
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="changeisUpdate()">Close</button>
+            </div>
+
+          </form>
+          </div>
+        </div>
+      </div>
+        
+     
+    
+
+    
