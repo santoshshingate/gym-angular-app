@@ -25,7 +25,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "html2pdf.js": "^0.9.2",
     "jquery": "^3.4.1",
-    "jspdf": "^1.4.1",
+    "jspdf": "^2.3.1",
     "ng-filter": "^0.1.6",
     "ng-image-slider": "^2.5.0",
     "ng-zorro-antd": "^8.5.2",
